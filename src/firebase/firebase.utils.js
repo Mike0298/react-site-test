@@ -10,6 +10,7 @@ const config = {
   storageBucket: "crwn-db-b8322.appspot.com",
   messagingSenderId: "286447921496",
   appId: "1:286447921496:web:b1597c5e5648c80166dd2d",
+  measurementId: "G-P28JESHCTL",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -40,9 +41,8 @@ firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-
 const provider = new firebase.auth.GoogleAuthProvider();
-//provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+provider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithRedirect(provider);
 
 export default firebase;
